@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import ForestField from './components/ForestField';
+import Timer from './components/Timer';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{justifyContent:'space-around', alignItems:'center',flex:1}}>
+      <ForestField/>
+    <Timer/>
     </View>
   );
 }
