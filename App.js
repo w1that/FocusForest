@@ -1,22 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ForestField from './components/ForestField';
-import Timer from './components/Timer';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet, View } from "react-native";
+import { Provider } from "react-redux";
+import FieldSelectionScreen from "./screens/FieldSelectionScreen";
+import TimerScreen from "./screens/TimerScreen";
+import { store } from "./store";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={{justifyContent:'space-around', alignItems:'center',flex:1}}>
-      <ForestField/>
-    <Timer/>
-    </View>
+    //     <Provider store={store}>
+    // <View style={{justifyContent:'space-around', alignItems:'center',flex:1}}>
+    //      <FieldSelectionScreen/>
+    //     </View>
+    //     </Provider>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="FieldSelection">
+          <Stack.Screen
+            name="FieldSelection"
+            component={FieldSelectionScreen}
+          />
+          <Stack.Screen
+            name="Timer"
+            component={TimerScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

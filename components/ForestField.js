@@ -3,6 +3,7 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Forest from "./Forest";
 
 export default function ForestField() {
+  console.log('forestField')
   return (
     <View
       style={{

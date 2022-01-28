@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Land from "./Land";
+import { LogBox } from 'react-native';
+import { useDispatch, useSelector } from "react-redux";
+import { selectLand } from "../slices/landSlice";
+LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop.']); // Ignore log notification by message
 
 export default function Forest() {
   const [lands, setLands] = useState([
@@ -33,6 +37,9 @@ export default function Forest() {
 
   const [selected, setSelected] = useState(-1);
   const [size, setSize] = useState(240);
+  const land = useSelector(state=>state.land.value);
+  const dispatch = useDispatch();
+  console.log('forest')
 
   return (
     <View>
@@ -47,7 +54,7 @@ export default function Forest() {
         }}
       >
         {lands.map((land) => (
-          <TouchableOpacity disabled={selected===land.id} onPress={()=>setSelected(land.id)}>
+          <TouchableOpacity disabled={selected===land.id} onPress={()=>dispatch(selectLand(land.id))}>
               <Land size={size} key={land.id} land={land} selected={selected} />
           </TouchableOpacity>
         ))}
