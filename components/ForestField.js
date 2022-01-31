@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { View } from "react-native";
 import Forest from "./Forest";
 
 export default function ForestField() {
-  console.log('forestField')
   return (
     <View
       style={{
@@ -17,9 +16,6 @@ export default function ForestField() {
       }}
     >
       <Forest />
-
-     
-     
     </View>
   );
 }

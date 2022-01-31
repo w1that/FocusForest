@@ -18,7 +18,7 @@ export default function FieldSelectionScreen({navigation}) {
       <View style={{flex:0.6,alignItems:'center',justifyContent:'center' }}>
       {land===-1?<Text style={{ fontSize: 30, paddingHorizontal: 20, }}>
         Geliştirmek istediğin alanı seç ve çalışmaya başla.
-      </Text >:<TouchableOpacity onPress={()=> navigation.navigate('Timer')} style={{ borderWidth:1, borderRadius:100, padding:6}}><Text style={{ fontSize: 30, paddingHorizontal: 20 }}>Devam et</Text></TouchableOpacity>}
+      </Text >:<TouchableOpacity onPress={()=> navigation.navigate('TimeSelection')} style={{ borderWidth:1, borderRadius:100, padding:6}}><Text style={{ fontSize: 30, paddingHorizontal: 20 }}>Devam et</Text></TouchableOpacity>}
       </View>
       
     </View>

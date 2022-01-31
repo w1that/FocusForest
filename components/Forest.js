@@ -1,45 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Land from "./Land";
-import { LogBox } from 'react-native';
+import { LogBox } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLand } from "../slices/landSlice";
-LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop.']); // Ignore log notification by message
+LogBox.ignoreLogs([
+  'Warning: Each child in a list should have a unique "key" prop.',
+]); // Ignore log notification by message
 
 export default function Forest() {
   const [lands, setLands] = useState([
-    { id: 1, empty: true },
-    { id: 2, empty: true },
-    { id: 3, empty: true },
-    { id: 4, empty: true },
-    { id: 5, empty: true },
-    { id: 6, empty: true },
-    { id: 7, empty: true },
-    { id: 8, empty: true },
-    { id: 9, empty: true },
-    { id: 10, empty: true },
-    { id: 11, empty: true },
-    { id: 12, empty: true },
-    { id: 13, empty: true },
-    { id: 14, empty: true },
-    { id: 15, empty: true },
-    { id: 16, empty: true },
-    { id: 17, empty: true },
-    { id: 18, empty: true },
-    { id: 19, empty: true },
-    { id: 20, empty: true },
-    { id: 21, empty: true },
-    { id: 22, empty: true },
-    { id: 23, empty: true },
-    { id: 24, empty: true },
-    { id: 25, empty: true },
+    { id: 1, plant: { id: 2, level: 5 } },
+    { id: 2, plant: { id: 1, level: 4 } },
+    { id: 3, plant: { id: 3, level: 3 } },
+    { id: 4, plant: { id: 1, level: 2 } },
+    { id: 5, plant: { id: 1, level: 1 } },
+    { id: 6, plant: { id: 1, level: 5 } },
+    { id: 7, plant: { id: -1, level: 5 } },
+    { id: 8, plant: { id: -1, level: -1 } },
+    { id: 9, plant: { id: -1, level: -1 } },
+    { id: 10, plant: { id: -1, level: -1 } },
+    { id: 11, plant: { id: -1, level: -1 } },
+    { id: 12, plant: { id: -1, level: -1 } },
+    { id: 13, plant: { id: -1, level: -1 } },
+    { id: 14, plant: { id: -1, level: -1 } },
+    { id: 15, plant: { id: -1, level: -1 } },
+    { id: 16, plant: { id: -1, level: -1 } },
+    { id: 17, plant: { id: -1, level: -1 } },
+    { id: 18, plant: { id: -1, level: -1 } },
+    { id: 19, plant: { id: -1, level: -1 } },
+    { id: 20, plant: { id: -1, level: -1 } },
+    { id: 21, plant: { id: -1, level: -1 } },
+    { id: 22, plant: { id: -1, level: -1 } },
+    { id: 23, plant: { id: -1, level: -1 } },
+    { id: 24, plant: { id: -1, level: -1 } },
+    { id: 25, plant: { id: -1, level: -1 } },
   ]);
 
   const [selected, setSelected] = useState(-1);
   const [size, setSize] = useState(240);
-  const land = useSelector(state=>state.land.value);
+  const land = useSelector((state) => state.land.value);
   const dispatch = useDispatch();
-  console.log('forest')
 
   return (
     <View>
@@ -54,8 +55,11 @@ export default function Forest() {
         }}
       >
         {lands.map((land) => (
-          <TouchableOpacity disabled={selected===land.id} onPress={()=>dispatch(selectLand(land.id))}>
-              <Land size={size} key={land.id} land={land} selected={selected} />
+          <TouchableOpacity
+            disabled={selected === land.id}
+            onPress={() => dispatch(selectLand(land.id))}
+          >
+            <Land size={size} key={land.id} land={land} selected={selected} />
           </TouchableOpacity>
         ))}
       </View>

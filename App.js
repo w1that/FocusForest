@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 import FieldSelectionScreen from "./screens/FieldSelectionScreen";
 import TimerScreen from "./screens/TimerScreen";
+import TimeSelectionScreen from "./screens/TimeSelectionScreen";
 import { store } from "./store";
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,10 @@ export default function App() {
           <Stack.Screen
             name="Timer"
             component={TimerScreen}
+          />
+          <Stack.Screen
+            name="TimeSelection"
+            component={TimeSelectionScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
