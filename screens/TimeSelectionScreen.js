@@ -26,6 +26,7 @@ export default function TimeSelectionScreen({ navigation }) {
         paddingTop: 30,
       }}
     >
+      <View>
       <View style={{ position: "relative" }}>
         <TouchableOpacity onPress={() => setHoursDropDown(!hoursDropDown)}>
           <Text>{selectedHour}</Text>
@@ -127,6 +128,14 @@ export default function TimeSelectionScreen({ navigation }) {
               <TouchableOpacity
                 onPress={() => {
                     setMinutesDropDown(!minutesDropDown)
+                  setSelectedMinute(1);
+                }}
+              >
+                <Text>1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                    setMinutesDropDown(!minutesDropDown)
                   setSelectedMinute(10);
                 }}
               >
@@ -169,6 +178,7 @@ export default function TimeSelectionScreen({ navigation }) {
           </View>
         )}
         <Text>dakika</Text>
+      </View>
       </View>
       <TouchableOpacity onPress={()=>navigation.navigate('Timer',{hours:selectedHour, minutes:selectedMinute})}><Text>Devam et</Text></TouchableOpacity>
     </View>
