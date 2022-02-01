@@ -26,161 +26,220 @@ export default function TimeSelectionScreen({ navigation }) {
         paddingTop: 30,
       }}
     >
-      <View>
-      <View style={{ position: "relative" }}>
-        <TouchableOpacity onPress={() => setHoursDropDown(!hoursDropDown)}>
-          <Text>{selectedHour}</Text>
-        </TouchableOpacity>
-        {hoursDropDown && (
-          <View
-            style={{
-              position: "absolute",
-              backgroundColor: "white",
-              width: 100,
-              zIndex: 2,
-            }}
+      <View style={{ padding: 10, width: "70%" }}>
+        <View
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            flexDirection: "row",
+            backgroundColor: "#fff",
+            borderWidth: 1,
+            borderColor: "gray",
+            borderRadius: 10,
+            marginVertical: 10,
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            style={{ backgroundColor: "orange", padding: 10 }}
+            onPress={() => setHoursDropDown(!hoursDropDown)}
           >
-            <ScrollView>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(0);
-                }}
+            <Text style={{ fontSize: 20 }}>{selectedHour}</Text>
+          </TouchableOpacity>
+          {hoursDropDown && (
+            <View
+              style={{
+                position: "absolute",
+                backgroundColor: "white",
+                width: 50,
+                borderWidth: 1,
+                zIndex: 2,
+                alignItems: "center",
+                top: -1,
+              }}
+            >
+              <ScrollView
+                style={{ height: 50 }}
+                showsVerticalScrollIndicator={false}
               >
-                <Text>0</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(1);
-                }}
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(0);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>0</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(1);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>1</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(2);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>2</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(3);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>3</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(4);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>4</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(5);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>5</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setHoursDropDown(!hoursDropDown);
+                    setSelectedHour(6);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>6</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
+          )}
+          <Text style={{ fontSize: 20 }}>saat</Text>
+        </View>
+
+        <View
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            flexDirection: "row",
+            backgroundColor: "#fff",
+            borderWidth: 1,
+            borderColor: "gray",
+            borderRadius: 10,
+            marginVertical: 10,
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            style={{ backgroundColor: "orange", padding: 10 }}
+            onPress={() => setMinutesDropDown(!minutesDropDown)}
+          >
+            <Text style={{ fontSize: 20 }}>{selectedMinute}</Text>
+          </TouchableOpacity>
+          {minutesDropDown && (
+            <View
+              style={{
+                position: "absolute",
+                backgroundColor: "white",
+                width: 50,
+                borderWidth: 1,
+                zIndex: 2,
+                alignItems: "center",
+                top: -1,
+              }}
+            >
+              <ScrollView
+                style={{ height: 50 }}
+                showsVerticalScrollIndicator={false}
               >
-                <Text>1</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(2);
-                }}
-              >
-                <Text>2</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(3);
-                }}
-              >
-                <Text>3</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(4);
-                }}
-              >
-                <Text>4</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(5);
-                }}
-              >
-                <Text>5</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setHoursDropDown(!hoursDropDown);
-                  setSelectedHour(6);
-                }}
-              >
-                <Text>6</Text>
-              </TouchableOpacity>
-            </ScrollView>
-          </View>
-        )}
-        <Text>saat</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMinutesDropDown(!minutesDropDown);
+                    setSelectedMinute(0);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>0</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMinutesDropDown(!minutesDropDown);
+                    setSelectedMinute(1);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>1</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMinutesDropDown(!minutesDropDown);
+                    setSelectedMinute(20);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>20</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMinutesDropDown(!minutesDropDown);
+                    setSelectedMinute(30);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>30</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMinutesDropDown(!minutesDropDown);
+                    setSelectedMinute(40);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>40</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMinutesDropDown(!minutesDropDown);
+                    setSelectedMinute(50);
+                  }}
+                >
+                  <Text style={{ fontSize: 20 }}>50</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
+          )}
+          <Text style={{ fontSize: 20 }}>dakika</Text>
+        </View>
       </View>
 
-      <View style={{ position: "relative" }}>
-        <TouchableOpacity onPress={() => setMinutesDropDown(!minutesDropDown)}>
-          <Text>{selectedMinute}</Text>
-        </TouchableOpacity>
-        {minutesDropDown && (
-          <View
-            style={{
-              position: "absolute",
-              backgroundColor: "white",
-              width: 100,
-              zIndex: 2,
-            }}
-          >
-            <ScrollView>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                  setSelectedMinute(0)
-                }}
-              >
-                <Text>0</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                  setSelectedMinute(1);
-                }}
-              >
-                <Text>1</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                  setSelectedMinute(10);
-                }}
-              >
-                <Text>10</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                    setSelectedMinute(20);
-                }}
-              >
-                <Text>20</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                    setSelectedMinute(30);
-                }}
-              >
-                <Text>30</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                    setSelectedMinute(40);
-                }}
-              >
-                <Text>40</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                    setMinutesDropDown(!minutesDropDown)
-                    setSelectedMinute(50);
-                }}
-              >
-                <Text>50</Text>
-              </TouchableOpacity>
-              
-            </ScrollView>
-          </View>
-        )}
-        <Text>dakika</Text>
+      <View style={{flexDirection:'row',width:"100%", justifyContent:'space-between'}}>
+      <TouchableOpacity
+      style={{paddingVertical:10,paddingHorizontal:20, borderRadius:10}}
+        onPress={() =>
+          navigation.navigate("FieldSelection", {
+            hours: selectedHour,
+            minutes: selectedMinute,
+          })
+        }
+      >
+        <Text style={{fontSize:20}}>Ormana Dön</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+      style={{backgroundColor:'white', paddingVertical:10,paddingHorizontal:20, borderRadius:10}}
+        onPress={() =>
+          navigation.navigate("Timer", {
+            hours: selectedHour,
+            minutes: selectedMinute,
+          })
+        }
+      >
+        <Text style={{fontSize:24}}>Devam et</Text>
+      </TouchableOpacity>
       </View>
-      </View>
-      <TouchableOpacity onPress={()=>navigation.navigate('Timer',{hours:selectedHour, minutes:selectedMinute})}><Text>Devam et</Text></TouchableOpacity>
     </View>
   );
 }

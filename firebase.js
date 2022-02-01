@@ -34,7 +34,7 @@ export async function initializeUserLands(userId) {
   for (let i = 0; i < 25; i++) {
     await setDoc(doc(db, "lands", `${userId}-${i}`), {
       userId: userId,
-      plant: { id: -1, level: -1 },
+      plant: { id: -1, level: 0},
     });
   }
 }
@@ -88,10 +88,6 @@ export async function getUsersLands(userId, setLands) {
   });
 }
 
-export async function increaseLevel(landId) {
-  const landRef = doc(db, "lands", landId);
-  updateDoc(landRef, {});
-}
 
 export async function handleLevel(selectedLand) {
   console.log(selectedLand)
@@ -105,7 +101,7 @@ export async function handleLevel(selectedLand) {
       }
 
       const newLevel = sfDoc.data().plant.level + 1;
-      const id = sfDoc.data().plant.id;
+      const id = 1;
       if (newLevel <= 5) {
         transaction.update(sfDocRef, { plant: { id: id, level: newLevel } });
         return newLevel;

@@ -26,6 +26,7 @@ export default function Land({ land, size }) {
             height: 20,
             position: "absolute",
             alignItems: "center",
+            transform: [{ rotateZ: "315deg" }],
             justifyContent: "center",
           }}
         >
@@ -34,7 +35,9 @@ export default function Land({ land, size }) {
               style={{
                 position: "absolute",
                 bottom: 0,
+                transform: [{ rotateY: "45deg" }],
                 height: 64,
+                transform: [{ rotateY: "45deg" }],
                 width: 64,
               }}
               source={require("../assets/seed1.png")}
@@ -46,6 +49,7 @@ export default function Land({ land, size }) {
                   position: "absolute",
                   bottom: -10,
                   height: 64,
+                  transform: [{ rotateY: "45deg" }],
                   width: 64,
                 }}
                 source={require("../assets/seed2.png")}
@@ -57,6 +61,7 @@ export default function Land({ land, size }) {
                   position: "absolute",
                   bottom: 0,
                   height: 64,
+                  transform: [{ rotateY: "45deg" }],
                   width: 64,
                 }}
                 source={require("../assets/sapling1.png")}
@@ -68,6 +73,7 @@ export default function Land({ land, size }) {
                   position: "absolute",
                   bottom: 0,
                   height: 100,
+                  transform: [{ rotateY: "45deg" }],
                   width: 100,
                 }}
                 source={require("../assets/sapling2.png")}
@@ -79,6 +85,7 @@ export default function Land({ land, size }) {
                   position: "absolute",
                   bottom: 0,
                   height: 100,
+                  transform: [{ rotateY: "45deg" }],
                   width: 100,
                 }}
                 source={require("../assets/lemon-animation.gif")}
@@ -90,6 +97,7 @@ export default function Land({ land, size }) {
                   position: "absolute",
                   bottom: 0,
                   height: 100,
+                  transform: [{ rotateY: "45deg" }],
                   width: 100,
                 }}
                 source={require("../assets/tree-animation.gif")}

@@ -1,61 +1,63 @@
 import React, { useEffect } from "react";
 import { View, Text, Button, Image } from "react-native";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { db, getUsersLands, handleLevel } from "../firebase";
 import { LogBox } from "react-native";
 import { doc, runTransaction } from "firebase/firestore";
-LogBox.ignoreLogs([
-  'Setting a timer for a long period of time',
-]); // Ignore log notification by message
+import { selectLand } from "../slices/landSlice";
+LogBox.ignoreLogs(["Setting a timer for a long period of time"]); // Ignore log notification by message
 
-export default function TimerScreen({navigation, route}) {
+export default function TimerScreen({ navigation, route }) {
   const [hours, setHours] = useState(route.params.hours);
   const [minutes, setMinutes] = useState(route.params.minutes);
-  const [milliseconds, setMilliseconds] = useState(route.params.minutes*60000+route.params.hours*3600000);
-  const [width, setWidth] = useState(95);
+  const [milliseconds, setMilliseconds] = useState(
+    route.params.minutes * 60000 + route.params.hours * 3600000
+  );
+  const [width, setWidth] = useState(97);
   const [playing, setPlaying] = useState(false);
   const [interval, setinterval] = useState(0);
   const [disabledButton, setDisabledButton] = useState(true);
-  const selectedLand = useSelector(state=>state.land.value);
+  const selectedLand = useSelector((state) => state.land.value);
+  const dispatch = useDispatch();
 
 
-  function fillBar(){
-    setinterval(setTimeout(() => {
-      setWidth(prev=>prev+1);
-      fillBar();
-    }, milliseconds/100))
+  function fillBar() {
+    setinterval(
+      setTimeout(() => {
+        setWidth((prev) => prev + 1);
+        fillBar();
+      }, milliseconds / 100)
+    );
   }
 
   useEffect(() => {
-    if(playing){
-      fillBar()
-    }else{
-      clearTimeout(interval)
+    if (playing) {
+      fillBar();
+    } else {
+      clearTimeout(interval);
     }
   }, [playing]);
-  
 
-  function play (){
-   if(!playing){
-     setPlaying(true);
-   }
-   if(playing){
-     setPlaying(false);
-   }
+  function play() {
+    if (!playing) {
+      setPlaying(true);
+    }
+    if (playing) {
+      setPlaying(false);
+    }
   }
 
   useEffect(() => {
-    if(width===100){
-      handleLevel(selectedLand.id)
+    if (width === 100) {
+      handleLevel(selectedLand.id);
       clearInterval(interval);
-      setPlaying(false) 
+      setPlaying(false);
       setTimeout(() => {
         setDisabledButton(false);
-      }, 2000);
+      }, 1000);
     }
   }, [width]);
-
 
   return (
     <View
@@ -80,18 +82,50 @@ export default function TimerScreen({navigation, route}) {
         <Text style={{ color: "white", fontSize: 20, fontWeight: "600" }}>
           {hours} saat
         </Text>
-        
+
         <Text style={{ color: "white", fontSize: 20 }}>{minutes} dakika</Text>
       </View>
-      <View style={{width:'100%', backgroundColor:'gray',borderRadius:20, alignItems:'center',justifyContent:'center'}}>
-        <Image source={require('../assets/seed1.gif')} />
+      <View
+        style={{
+          width: "100%",
+          backgroundColor: "gray",
+          borderRadius: 20,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={require("../assets/seed1.gif")} />
       </View>
-      <View style={{ backgroundColor: "#f0f0f0", width: "100%", height:5,borderWidth:1, borderRadius:5 }}>
+      <View
+        style={{
+          backgroundColor: "#f0f0f0",
+          width: "100%",
+          height: 5,
+          borderWidth: 1,
+          borderRadius: 5,
+        }}
+      >
         <View
-          style={{ height: "100%", backgroundColor: width===100?"green":"yellow", width: `${width}%`,borderRightWidth:1}}
+          style={{
+            height: "100%",
+            backgroundColor: width === 100 ? "green" : "yellow",
+            width: `${width}%`,
+            borderRightWidth: 1,
+          }}
         ></View>
       </View>
-      {width !==100?<Button onPress={play} title={playing?'duraklat':'başlat'}></Button>:<Button disabled={disabledButton} onPress={()=>navigation.push('FieldSelection')} title="Bahçeye dön"></Button>}
+      {width !== 100 ? (
+        <Button onPress={play} title={playing ? "duraklat" : "başlat"}></Button>
+      ) : (
+        <Button
+          disabled={disabledButton}
+          onPress={() => {
+            navigation.push("FieldSelection")
+            dispatch(selectLand({}));
+          }}
+          title="Bahçeye dön"
+        ></Button>
+      )}
     </View>
   );
 }
