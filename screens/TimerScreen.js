@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Button, Image } from "react-native";
+import { View, Text, Button, Image, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { db, getUsersLands, handleLevel } from "../firebase";
@@ -115,16 +115,27 @@ export default function TimerScreen({ navigation, route }) {
         ></View>
       </View>
       {width !== 100 ? (
-        <Button onPress={play} title={playing ? "duraklat" : "başlat"}></Button>
+        // <Button onPress={play} title={playing ? "duraklat" : "başlat"}></Button>
+        playing?<TouchableOpacity onPress={play} style={{backgroundColor:'#deba3a', paddingVertical:10, paddingHorizontal:20, borderRadius:50, width:"50%", alignItems:'center', justifyContent:'center'}}>
+        <Text style={{fontSize:20, color:'white'}}>Durakla</Text>
+      </TouchableOpacity >:<TouchableOpacity onPress={play} style={{backgroundColor:'#0e9e1d', paddingVertical:10, paddingHorizontal:20, borderRadius:50, width:"50%", alignItems:'center', justifyContent:'center'}}>
+          <Text style={{fontSize:20, color:'white'}}>Başla</Text>
+        </TouchableOpacity>
       ) : (
-        <Button
-          disabled={disabledButton}
-          onPress={() => {
-            navigation.push("FieldSelection")
-            dispatch(selectLand({}));
-          }}
-          title="Bahçeye dön"
-        ></Button>
+        // <Button
+        //   disabled={disabledButton}
+          // onPress={() => {
+          //   navigation.push("FieldSelection")
+          //   dispatch(selectLand({}));
+          // }}
+        //   title="Bahçeye dön"
+        // ></Button>
+        <TouchableOpacity onPress={() => {
+          navigation.push("FieldSelection")
+          dispatch(selectLand({}));
+        }} style={{backgroundColor:'purple', paddingVertical:10, paddingHorizontal:20, borderRadius:50}}>
+          <Text style={{fontSize:20, color:'white'}}>Bahçeye dön</Text>
+        </TouchableOpacity>
       )}
     </View>
   );
