@@ -2,6 +2,11 @@ import React, { useEffect } from "react";
 import { View, Text, Button, Image } from "react-native";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { getUsersLands } from "../firebase";
+import { LogBox } from "react-native";
+LogBox.ignoreLogs([
+  'Setting a timer for a long period of time',
+]); // Ignore log notification by message
 
 export default function TimerScreen({navigation, route}) {
   const [hours, setHours] = useState(route.params.hours);
@@ -12,7 +17,8 @@ export default function TimerScreen({navigation, route}) {
   const [interval, setinterval] = useState(0);
 
   const selectedLand = useSelector(state=>state.land.value);
-  console.log(selectedLand)
+
+  console.log(selectedLand);
 
   function fillBar(){
     setinterval(setTimeout(() => {
@@ -87,7 +93,7 @@ export default function TimerScreen({navigation, route}) {
         ></View>
       </View>
       {width !==100?<Button onPress={play} title={playing?'duraklat':'başlat'}></Button>:<Button onPress={()=>navigation.navigate('FieldSelection')} title="Bahçeye dön"></Button>}
-
+        
     </View>
   );
 }

@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import FieldSelectionScreen from "./screens/FieldSelectionScreen";
 import TimerScreen from "./screens/TimerScreen";
 import TimeSelectionScreen from "./screens/TimeSelectionScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import { store } from "./store";
 
 const Stack = createNativeStackNavigator();
@@ -18,10 +19,14 @@ export default function App() {
     //     </Provider>
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="FieldSelection">
+        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="Welcome">
           <Stack.Screen
             name="FieldSelection"
             component={FieldSelectionScreen}
+          />
+           <Stack.Screen
+            name="Welcome"
+            component={WelcomeScreen}
           />
           <Stack.Screen
             name="Timer"

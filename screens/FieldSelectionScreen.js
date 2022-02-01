@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import ForestField from "../components/ForestField";
+import { getUsersLands } from "../firebase";
 
 export default function FieldSelectionScreen({navigation}) {
   const land =  useSelector(state=>state.land.value);
+
+  
   return (
     <View
       style={{
