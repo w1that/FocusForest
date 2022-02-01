@@ -14,6 +14,7 @@ export default function FieldSelectionScreen({ navigation }) {
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor:'#ebfdff'
       }}
     >
       <ForestField />
@@ -21,13 +22,13 @@ export default function FieldSelectionScreen({ navigation }) {
         style={{ flex: 0.6, alignItems: "center", justifyContent: "center" }}
       >
         {!land.id  ? (
-          <Text style={{ fontSize: 30, paddingHorizontal: 20 }}>
+          <Text style={{ fontSize: 24, paddingHorizontal: 20, textAlign:'center' }}>
             Geliştirmek istediğin alanı seç ve çalışmaya başla.
           </Text>
         ) : (
           <TouchableOpacity
             onPress={() => navigation.navigate("TimeSelection")}
-            style={{ borderWidth: 1, borderRadius: 100, padding: 6 }}
+            style={{ borderWidth: 1, borderRadius: 100, padding: 6, borderColor:'#bdbdbd', backgroundColor:'white' }}
           >
             <Text style={{ fontSize: 30, paddingHorizontal: 20 }}>
               Devam et

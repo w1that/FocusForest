@@ -65,7 +65,7 @@ export default function TimerScreen({ navigation, route }) {
         flex: 1,
         justifyContent: "space-evenly",
         alignItems: "center",
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#f4e6ff",
         paddingHorizontal: 50,
       }}
     >

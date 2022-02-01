@@ -8,11 +8,13 @@ export default function ForestField() {
       style={{
         width: "90%",
         height: "50%",
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#defbff",
+        borderWidth:1,
+        borderColor:'#4aedff',
+        borderRadius:20,
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-        // overflow: "hidden",
       }}
     >
       <Forest />

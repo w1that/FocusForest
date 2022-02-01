@@ -21,7 +21,7 @@ export default function TimeSelectionScreen({ navigation }) {
         flex: 1,
         justifyContent: "space-evenly",
         alignItems: "center",
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#fff6e6",
         paddingHorizontal: 50,
         paddingTop: 30,
       }}
@@ -216,20 +216,20 @@ export default function TimeSelectionScreen({ navigation }) {
         </View>
       </View>
 
-      <View style={{flexDirection:'row',width:"100%", justifyContent:'space-between'}}>
+      <View style={{flexDirection:'row',width:"100%", justifyContent:'space-between', alignItems:'center'}}>
       <TouchableOpacity
       style={{paddingVertical:10,paddingHorizontal:20, borderRadius:10}}
         onPress={() =>
-          navigation.navigate("FieldSelection", {
+          navigation.push("FieldSelection", {
             hours: selectedHour,
             minutes: selectedMinute,
           })
         }
       >
-        <Text style={{fontSize:20}}>Ormana Dön</Text>
+        <Text style={{fontSize:20}}>Bahçeye Dön</Text>
       </TouchableOpacity>
       <TouchableOpacity
-      style={{backgroundColor:'white', paddingVertical:10,paddingHorizontal:20, borderRadius:10}}
+      style={{backgroundColor:'white', paddingVertical:10,paddingHorizontal:20, borderRadius:50, borderColor:'#bdbdbd', borderWidth:1}}
         onPress={() =>
           navigation.navigate("Timer", {
             hours: selectedHour,
