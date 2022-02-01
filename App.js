@@ -12,11 +12,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    //     <Provider store={store}>
-    // <View style={{justifyContent:'space-around', alignItems:'center',flex:1}}>
-    //      <FieldSelectionScreen/>
-    //     </View>
-    //     </Provider>
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="Welcome">

@@ -14,7 +14,7 @@ export default function FieldSelectionScreen({navigation}) {
         width: "100%",
         height: "100%",
         alignItems: "center",
-        justifyContent: "space-evenly",
+        justifyContent: "center",
       }}
     >
       <ForestField />

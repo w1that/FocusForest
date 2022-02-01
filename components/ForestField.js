@@ -12,7 +12,7 @@ export default function ForestField() {
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-        overflow: "hidden",
+        // overflow: "hidden",
       }}
     >
       <Forest />

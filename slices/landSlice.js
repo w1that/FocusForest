@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { getUsersLands } from "../firebase";
 
 const initialState={
-    value:-1
+    value:{}
 }
 
 export const landSlice = createSlice({

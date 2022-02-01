@@ -4,7 +4,8 @@ import Land from "./Land";
 import { LogBox } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLand } from "../slices/landSlice";
-import { getUsersLands, initializeUserLands } from "../firebase";
+import { db, getUsersLands, initializeUserLands } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 LogBox.ignoreLogs([
   'Warning: Each child in a list should have a unique "key" prop.',
 ]); // Ignore log notification by message
@@ -37,38 +38,38 @@ export default function Forest() {
     // { id: 24, plant: { id: -1, level: -1 } },
     // { id: 25, plant: { id: -1, level: -1 } },
   ]);
-  const userId = useSelector(state=>state.user.id);
+
+  const size=260;
+  const selectedLand = useSelector((state) => state.land.value);
+  const user = useSelector(state=>state.user.id)
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
-    if(lands.length===0){
-      getUsersLands(userId,setLands) 
-    }
-  }, []);
-
-  const [selected, setSelected] = useState(-1);
-  const [size, setSize] = useState(240);
-  const land = useSelector((state) => state.land.value);
-  const dispatch = useDispatch();
+    setLands([]);
+    getUsersLands(user,setLands); 
+  }, []); 
+  
 
 
   return (
     <View>
+      
       <View
         style={{
           width: size,
           height: size,
           backgroundColor: "green",
-          transform: [{ rotateX: "45deg" }, { rotateZ: "45deg" }],
           display: "flex",
           flexWrap: "wrap",
         }}
       >
         {lands.map((land) => (
           <TouchableOpacity
-            disabled={selected === land.id}
-            onPress={() => dispatch(selectLand(land.id))}
+            disabled={selectedLand === land.id}
+            onPress={() => dispatch(selectLand(land))}
           >
-            <Land size={size} key={land.id} land={land} selected={selected} />
+            <Land size={size} key={land.id} land={land}/>
           </TouchableOpacity>
         ))}
       </View>

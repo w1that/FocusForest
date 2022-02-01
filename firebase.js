@@ -10,6 +10,8 @@ import {
   getFirestore,
   setDoc,
   doc,
+  updateDoc,
+  runTransaction,
 } from "firebase/firestore";
 import { nanoid } from "nanoid/non-secure";
 import { setCurrentUser } from "./slices/userSlice";
@@ -26,7 +28,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore();
+export const db = getFirestore();
 
 export async function initializeUserLands(userId) {
   for (let i = 0; i < 25; i++) {
@@ -37,39 +39,80 @@ export async function initializeUserLands(userId) {
   }
 }
 
-export async function signup(name, surname, password, email, navigation, dispatch) {
+export async function signup(
+  name,
+  surname,
+  password,
+  email,
+  navigation,
+  dispatch
+) {
   const id = nanoid();
   setDoc(doc(db, "users", id), {
     name,
     surname,
     password,
     email,
-  }).then(() => {
-    initializeUserLands(id);
-    dispatch(setCurrentUser(id));
-    
-  }).then(()=>navigation.navigate("FieldSelection"));
+  })
+    .then(() => {
+      initializeUserLands(id);
+      dispatch(setCurrentUser(id));
+    })
+    .then(() => navigation.navigate("FieldSelection"));
 }
 
-export async function signin(email, password, dispatch,navigation){
-    const q = query(collection(db, "users"), where("email", "==", email), where('password','==',password));
-    getDocs(q).then(res=>{
-        if(res.docs.length===0){
-            alert('yok');
-        }else{
-             dispatch(setCurrentUser(res.docs[0].id));
-             navigation.navigate('FieldSelection');
-        }
-    }).catch(err=>console.log(err))
-
+export async function signin(email, password, dispatch, navigation) {
+  const q = query(
+    collection(db, "users"),
+    where("email", "==", email),
+    where("password", "==", password)
+  );
+  getDocs(q)
+    .then((res) => {
+      if (res.docs.length === 0) {
+        alert("yok");
+      } else {
+        dispatch(setCurrentUser(res.docs[0].id));
+        navigation.navigate("FieldSelection");
+      }
+    })
+    .catch((err) => console.log(err));
 }
 
 export async function getUsersLands(userId, setLands) {
   const q = query(collection(db, "lands"), where("userId", "==", userId));
-  getDocs(q).then(res=>{
-      res.docs.forEach(doc=>{
-          setLands(prev=>[...prev, {id:doc.id, plant:doc.data().plant}])
-      })
-  })
-  
+  getDocs(q).then((res) => {
+    res.docs.forEach((doc) => {
+      setLands((prev) => [...prev, { id: doc.id, plant: doc.data().plant }]);
+    });
+  });
+}
+
+export async function increaseLevel(landId) {
+  const landRef = doc(db, "lands", landId);
+  updateDoc(landRef, {});
+}
+
+export async function handleLevel(selectedLand) {
+  console.log(selectedLand)
+  const sfDocRef = doc(db, "lands", selectedLand);
+
+  try {
+    const newPopulation = await runTransaction(db, async (transaction) => {
+      const sfDoc = await transaction.get(sfDocRef);
+      if (!sfDoc.exists()) {
+        throw "Document does not exist!";
+      }
+
+      const newLevel = sfDoc.data().plant.level + 1;
+      const id = sfDoc.data().plant.id;
+      if (newLevel <= 5) {
+        transaction.update(sfDocRef, { plant: { id: id, level: newLevel } });
+        return newLevel;
+      }
+    });
+  } catch (e) {
+    // This will be a "population is too big" error.
+    console.error(e);
+  }
 }
