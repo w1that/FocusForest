@@ -52,7 +52,7 @@ export default function Land({ land, size }) {
                   transform: [{ rotateY: "45deg" }],
                   width: 64,
                 }}
-                source={require("../assets/seed2.png")}
+                source={require("../assets/seed2-animation.gif")}
               ></Image>
             )) ||
             (land.plant.level === 3 && (
@@ -64,7 +64,7 @@ export default function Land({ land, size }) {
                   transform: [{ rotateY: "45deg" }],
                   width: 64,
                 }}
-                source={require("../assets/sapling1.png")}
+                source={require("../assets/sapling1-animation.gif")}
               ></Image>
             )) ||
             (land.plant.level === 4 && (
@@ -76,7 +76,7 @@ export default function Land({ land, size }) {
                   transform: [{ rotateY: "45deg" }],
                   width: 100,
                 }}
-                source={require("../assets/sapling2.png")}
+                source={require("../assets/sapling2-animation.gif")}
               ></Image>
             )) ||
             (land.plant.level === 5 && land.plant.id === 1 && (

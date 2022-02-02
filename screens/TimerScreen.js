@@ -6,6 +6,7 @@ import { db, getUsersLands, handleLevel } from "../firebase";
 import { LogBox } from "react-native";
 import { doc, runTransaction } from "firebase/firestore";
 import { selectLand } from "../slices/landSlice";
+import Icon from "react-native-vector-icons/Entypo";
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]); // Ignore log notification by message
 
 export default function TimerScreen({ navigation, route }) {
@@ -14,13 +15,12 @@ export default function TimerScreen({ navigation, route }) {
   const [milliseconds, setMilliseconds] = useState(
     route.params.minutes * 60000 + route.params.hours * 3600000
   );
-  const [width, setWidth] = useState(97);
+  const [width, setWidth] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [interval, setinterval] = useState(0);
   const [disabledButton, setDisabledButton] = useState(true);
   const selectedLand = useSelector((state) => state.land.value);
   const dispatch = useDispatch();
-
 
   function fillBar() {
     setinterval(
@@ -72,18 +72,27 @@ export default function TimerScreen({ navigation, route }) {
       <View
         style={{
           flexDirection: "row",
-          width: "80%",
+          width: "84%",
           justifyContent: "space-evenly",
           backgroundColor: "purple",
           padding: 10,
           borderRadius: 50,
         }}
       >
-        <Text style={{ color: "white", fontSize: 20, fontWeight: "600" }}>
+        <Text
+          style={{
+            color: "white",
+            fontSize: 20,
+            fontWeight: "600",
+            fontFamily: "monospace",
+          }}
+        >
           {hours} saat
         </Text>
 
-        <Text style={{ color: "white", fontSize: 20 }}>{minutes} dakika</Text>
+        <Text style={{ color: "white", fontSize: 20, fontFamily: "monospace" }}>
+          {minutes} dakika
+        </Text>
       </View>
       <View
         style={{
@@ -115,27 +124,79 @@ export default function TimerScreen({ navigation, route }) {
         ></View>
       </View>
       {width !== 100 ? (
-        // <Button onPress={play} title={playing ? "duraklat" : "başlat"}></Button>
-        playing?<TouchableOpacity onPress={play} style={{backgroundColor:'#deba3a', paddingVertical:10, paddingHorizontal:20, borderRadius:50, width:"50%", alignItems:'center', justifyContent:'center'}}>
-        <Text style={{fontSize:20, color:'white'}}>Durakla</Text>
-      </TouchableOpacity >:<TouchableOpacity onPress={play} style={{backgroundColor:'#0e9e1d', paddingVertical:10, paddingHorizontal:20, borderRadius:50, width:"50%", alignItems:'center', justifyContent:'center'}}>
-          <Text style={{fontSize:20, color:'white'}}>Başla</Text>
-        </TouchableOpacity>
+        playing ? (
+          
+            <TouchableOpacity
+              onPress={play}
+              style={{
+                backgroundColor: "#deba3a",
+                paddingVertical: 10,
+                paddingHorizontal: 20,
+                borderRadius: 50,
+                width: "50%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: "white",
+                  fontFamily: "monospace",
+                }}
+              >
+                Durakla
+              </Text>
+            </TouchableOpacity>
+        ) : (
+          <View style={{justifyContent:'space-around', flexDirection:'row', alignItems:'stretch', width:'100%'}}>
+          <TouchableOpacity onPress={()=>{
+            navigation.push("FieldSelection");
+            setWidth(0);
+            clearTimeout(interval);
+          }} style={{backgroundColor:'red', paddingVertical:10, paddingHorizontal:20, borderRadius:50, justifyContent:'center', alignItems:'center'}}>
+            <Icon name="cross" color={'white'} size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={play}
+            style={{
+              backgroundColor: "#0e9e1d",
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              borderRadius: 50,
+              width: "50%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: 20, color: "white", fontFamily: "monospace" }}
+            >
+              Başla
+            </Text>
+          </TouchableOpacity>
+          </View>
+        )
       ) : (
-        // <Button
-        //   disabled={disabledButton}
-          // onPress={() => {
-          //   navigation.push("FieldSelection")
-          //   dispatch(selectLand({}));
-          // }}
-        //   title="Bahçeye dön"
-        // ></Button>
-        <TouchableOpacity onPress={() => {
-          navigation.push("FieldSelection")
-          dispatch(selectLand({}));
-        }} style={{backgroundColor:'purple', paddingVertical:10, paddingHorizontal:20, borderRadius:50}}>
-          <Text style={{fontSize:20, color:'white'}}>Bahçeye dön</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("FieldSelection");
+            dispatch(selectLand({}));
+          }}
+          style={{
+            backgroundColor: "purple",
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            borderRadius: 50,
+          }}
+        >
+          <Text
+            style={{ fontSize: 20, color: "white", fontFamily: "monospace" }}
+          >
+            Bahçeye dön
+          </Text>
         </TouchableOpacity>
+       
       )}
     </View>
   );

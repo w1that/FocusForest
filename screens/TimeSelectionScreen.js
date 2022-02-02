@@ -42,7 +42,7 @@ export default function TimeSelectionScreen({ navigation }) {
           }}
         >
           <TouchableOpacity
-            style={{ backgroundColor: "orange", padding: 10 }}
+            style={{ backgroundColor: "orange", padding: 10, width:'25%', justifyContent:'center', alignItems:'center' }}
             onPress={() => setHoursDropDown(!hoursDropDown)}
           >
             <Text style={{ fontSize: 20 }}>{selectedHour}</Text>
@@ -140,7 +140,7 @@ export default function TimeSelectionScreen({ navigation }) {
           }}
         >
           <TouchableOpacity
-            style={{ backgroundColor: "orange", padding: 10 }}
+            style={{ backgroundColor: "orange", padding: 10, width:'25%', justifyContent:'center', alignItems:'center' }}
             onPress={() => setMinutesDropDown(!minutesDropDown)}
           >
             <Text style={{ fontSize: 20 }}>{selectedMinute}</Text>

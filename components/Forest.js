@@ -9,6 +9,7 @@ import { doc, updateDoc } from "firebase/firestore";
 LogBox.ignoreLogs([
   'Warning: Each child in a list should have a unique "key" prop.',
 ]); // Ignore log notification by message
+import Icon from 'react-native-vector-icons/Fontisto'
 
 export default function Forest() {
   const [lands, setLands] = useState([]);
@@ -20,19 +21,27 @@ export default function Forest() {
 
 
   useEffect(() => {
+    updateForest();
+  }, []); 
+
+  function updateForest(){
     setLands([]);
     getUsersLands(user,setLands); 
-  }, []); 
+  }
   
 
   return (
-    <View>
+    <View style={{width:'100%', justifyContent:'center', alignItems:'center',height:'100%',borderRadius:50}}>
+      <TouchableOpacity onPress={updateForest} style={{position:'absolute', bottom:10, right:10}}>
+        <Icon size={30} name="spinner-refresh" />
+      </TouchableOpacity>
+      
       
       <View
         style={{
           width: size,
           height: size,
-          backgroundColor: "green",
+          backgroundColor: "#30c96b",
           transform:[{rotateX:'45deg'},{rotateZ:'45deg'}],
           display: "flex",
           flexWrap: "wrap",

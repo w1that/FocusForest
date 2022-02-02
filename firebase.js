@@ -101,7 +101,7 @@ export async function handleLevel(selectedLand) {
       }
 
       const newLevel = sfDoc.data().plant.level + 1;
-      const id = 1;
+      const id = 2;
       if (newLevel <= 5) {
         transaction.update(sfDocRef, { plant: { id: id, level: newLevel } });
         return newLevel;

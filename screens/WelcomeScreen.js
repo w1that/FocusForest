@@ -27,7 +27,7 @@ export default function WelcomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       )}
-      <View style={{ width:500, height:500, borderRadius:400, position:'absolute', top:-200,right:0, backgroundColor:'#dbecff' }}></View>
+      <View style={{ width:500, height:500, borderRadius:400, position:'absolute', top:-200,right:0, borderWidth:5, borderColor:'#dbecff' }}></View>
       <View style={{ width:300, height:300, borderRadius:400, position:'absolute', bottom:-200,right:-100, backgroundColor:'#e3ffdb' }}></View>
     </View>
   );
