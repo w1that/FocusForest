@@ -89,8 +89,7 @@ export async function getUsersLands(userId, setLands) {
 }
 
 
-export async function handleLevel(selectedLand) {
-  console.log(selectedLand)
+export async function handleLevel(selectedLand, selectedSeed) {
   const sfDocRef = doc(db, "lands", selectedLand);
 
   try {
@@ -101,7 +100,7 @@ export async function handleLevel(selectedLand) {
       }
 
       const newLevel = sfDoc.data().plant.level + 1;
-      const id = 2;
+      const id = sfDoc.data().plant.level===0?selectedSeed:sfDoc.data().plant.id;
       if (newLevel <= 5) {
         transaction.update(sfDocRef, { plant: { id: id, level: newLevel } });
         return newLevel;

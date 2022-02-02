@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 
 export default function Land({ land, size }) {
   const selectedLand = useSelector((state) => state.land.value);
+  const selectedSeed = useSelector((state) => state.land.seed);
+  
+
 
   return (
     <View
@@ -17,9 +20,21 @@ export default function Land({ land, size }) {
         alignItems: "center",
       }}
     >
-      {!land.plant.id ? (
-        <></>
-      ) : (
+      {land.plant.id===-1 ? 
+        (selectedSeed===-1&&<></>)||(selectedSeed===1&&land.id===selectedLand.id&&<Image
+          style={{
+            transform: [{ rotateZ: "-45deg" },{rotateY:'-45deg'}],
+            height: 32,
+          }}
+          source={require("../assets/lemon-fruit.png")}
+        ></Image>)||(selectedSeed===2&&land.id===selectedLand.id&&<Image
+          style={{
+            transform: [{ rotateZ: "-45deg" },{rotateY:'-45deg'}],
+            height: 32,
+          }}
+          source={require("../assets/apple-fruit.png")}
+        ></Image>)
+     : (
         <View
           style={{
             width: 20,

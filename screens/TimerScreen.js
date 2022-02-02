@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { db, getUsersLands, handleLevel } from "../firebase";
 import { LogBox } from "react-native";
 import { doc, runTransaction } from "firebase/firestore";
-import { selectLand } from "../slices/landSlice";
+import { selectLand, selectSeed } from "../slices/landSlice";
 import Icon from "react-native-vector-icons/Entypo";
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]); // Ignore log notification by message
 
@@ -15,12 +15,14 @@ export default function TimerScreen({ navigation, route }) {
   const [milliseconds, setMilliseconds] = useState(
     route.params.minutes * 60000 + route.params.hours * 3600000
   );
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(97);
   const [playing, setPlaying] = useState(false);
   const [interval, setinterval] = useState(0);
   const [disabledButton, setDisabledButton] = useState(true);
   const selectedLand = useSelector((state) => state.land.value);
   const dispatch = useDispatch();
+  const seed = useSelector(state=>state.land.seed);
+
 
   function fillBar() {
     setinterval(
@@ -50,7 +52,7 @@ export default function TimerScreen({ navigation, route }) {
 
   useEffect(() => {
     if (width === 100) {
-      handleLevel(selectedLand.id);
+      handleLevel(selectedLand.id, seed);
       clearInterval(interval);
       setPlaying(false);
       setTimeout(() => {
@@ -93,17 +95,6 @@ export default function TimerScreen({ navigation, route }) {
         <Text style={{ color: "white", fontSize: 20, fontFamily: "monospace" }}>
           {minutes} dakika
         </Text>
-      </View>
-      <View
-        style={{
-          width: "100%",
-          backgroundColor: "gray",
-          borderRadius: 20,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Image source={require("../assets/seed1.gif")} />
       </View>
       <View
         style={{
@@ -151,9 +142,11 @@ export default function TimerScreen({ navigation, route }) {
         ) : (
           <View style={{justifyContent:'space-around', flexDirection:'row', alignItems:'stretch', width:'100%'}}>
           <TouchableOpacity onPress={()=>{
-            navigation.push("FieldSelection");
+            dispatch(selectSeed(-1));
+            dispatch(selectLand({id:-1, plant:{id:-2,level:-2}}));
             setWidth(0);
             clearTimeout(interval);
+            navigation.push("FieldSelection");
           }} style={{backgroundColor:'red', paddingVertical:10, paddingHorizontal:20, borderRadius:50, justifyContent:'center', alignItems:'center'}}>
             <Icon name="cross" color={'white'} size={30} />
           </TouchableOpacity>
@@ -181,7 +174,8 @@ export default function TimerScreen({ navigation, route }) {
         <TouchableOpacity
           onPress={() => {
             navigation.push("FieldSelection");
-            dispatch(selectLand({}));
+            dispatch(selectSeed(-1))
+            dispatch(selectLand({id:-1, plant:{id:-2,level:-2}}));
           }}
           style={{
             backgroundColor: "purple",

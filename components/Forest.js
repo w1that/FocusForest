@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, Button } from "react-native";
+import { Text, TouchableOpacity, View, Button, ImageBackground, Image } from "react-native";
 import Land from "./Land";
 import { LogBox } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLand } from "../slices/landSlice";
+import { selectLand, selectSeed } from "../slices/landSlice";
 import { db, getUsersLands, initializeUserLands } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 LogBox.ignoreLogs([
@@ -32,17 +32,30 @@ export default function Forest() {
 
   return (
     <View style={{width:'100%', justifyContent:'center', alignItems:'center',height:'100%',borderRadius:50}}>
-      <TouchableOpacity onPress={updateForest} style={{position:'absolute', bottom:10, right:10}}>
+      
+      <View  style={{position:'absolute', bottom:10, right:10, flexDirection:'row',justifyContent:'space-evenly', width:'40%'}}>
+     
+      {selectedLand.plant.id===-1&&<TouchableOpacity onPress={()=>{
+        dispatch(selectSeed(2))
+      }} style={{justifyContent:'center', alignItems:'center'}}>
+        <Image style={{width:30}} source={require('../assets/apple-fruit.png')}/>
+      </TouchableOpacity>}
+      {selectedLand.plant.id===-1&&<TouchableOpacity onPress={()=>{
+        dispatch(selectSeed(1))
+        }} style={{justifyContent:'center', alignItems:'center'}}>
+        
+        <Image style={{width:30}} source={require('../assets/lemon-fruit.png')}/>
+      </TouchableOpacity>}
+      <TouchableOpacity onPress={updateForest} >
         <Icon size={30} name="spinner-refresh" />
       </TouchableOpacity>
+      </View>
       
-      
+      <ImageBackground style={{width:size, height:size, alignItems:'center', justifyContent:'center',transform:[{rotateX:'45deg'},{rotateZ:'45deg'}],}} source={require('../assets/loading-animation.gif')} >
       <View
         style={{
           width: size,
           height: size,
-          backgroundColor: "#30c96b",
-          transform:[{rotateX:'45deg'},{rotateZ:'45deg'}],
           display: "flex",
           flexWrap: "wrap",
         }}
@@ -56,6 +69,7 @@ export default function Forest() {
           </TouchableOpacity>
         ))}
       </View>
+      </ImageBackground>
     </View>
   );
 }

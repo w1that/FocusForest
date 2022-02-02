@@ -5,7 +5,9 @@ import ForestField from "../components/ForestField";
 
 export default function FieldSelectionScreen({ navigation }) {
   const land = useSelector((state) => state.land.value);
-  console.log(land)
+  const seed = useSelector(state=>state.land.seed);
+  console.log(seed, 'seed------------')
+  console.log(land, 'land-------')
 
   return (
     <View
@@ -21,11 +23,11 @@ export default function FieldSelectionScreen({ navigation }) {
       <View
         style={{ flex: 0.6, alignItems: "center", justifyContent: "center" }}
       >
-        {!land.id  ? (
+        {land.id===-1  ? (
           <Text style={{ fontSize: 24, paddingHorizontal: 20, textAlign:'center' }}>
             Geliştirmek istediğin alanı seç ve çalışmaya başla.
           </Text>
-        ) : (
+        ) : seed===-1?<Text style={{ fontSize: 24, paddingHorizontal: 20, textAlign:'center' }}>Büyütmek istediğin ağaç türünü seç</Text>:(
           <TouchableOpacity
             onPress={() => navigation.navigate("TimeSelection")}
             style={{ borderWidth: 1, borderRadius: 100, padding: 6, borderColor:'#bdbdbd', backgroundColor:'white' }}
