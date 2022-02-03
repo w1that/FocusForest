@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import Forest from "./Forest";
 
 export default function ForestField() {
+
   return (
     <View
       style={{

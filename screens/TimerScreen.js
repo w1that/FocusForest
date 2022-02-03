@@ -124,7 +124,7 @@ export default function TimerScreen({ navigation, route }) {
                 paddingVertical: 10,
                 paddingHorizontal: 20,
                 borderRadius: 50,
-                width: "50%",
+                width: "60%",
                 alignItems: "center",
                 justifyContent: "center",
               }}

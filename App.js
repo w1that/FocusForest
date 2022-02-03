@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 import FieldSelectionScreen from "./screens/FieldSelectionScreen";
 import TimerScreen from "./screens/TimerScreen";
@@ -13,6 +13,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <Provider store={store}>
+      <StatusBar  hidden/>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="Welcome">
           <Stack.Screen

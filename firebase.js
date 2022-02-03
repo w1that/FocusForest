@@ -14,6 +14,7 @@ import {
   runTransaction,
 } from "firebase/firestore";
 import { nanoid } from "nanoid/non-secure";
+import { Alert } from "react-native";
 import { setCurrentUser } from "./slices/userSlice";
 
 // Your web app's Firebase configuration
@@ -29,6 +30,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
+
 
 export async function initializeUserLands(userId) {
   for (let i = 0; i < 25; i++) {
@@ -48,17 +50,33 @@ export async function signup(
   dispatch
 ) {
   const id = nanoid();
-  setDoc(doc(db, "users", id), {
-    name,
-    surname,
-    password,
-    email,
-  })
-    .then(() => {
-      initializeUserLands(id);
-      dispatch(setCurrentUser(id));
+  const q = query(
+    collection(db, "users"),
+    where("email", "==", email)
+  );
+  getDocs(q)
+    .then((res) => {
+      if (res.docs.length === 0) {
+        setDoc(doc(db, "users", id), {
+          name,
+          surname,
+          password,
+          email,
+        })
+          .then(() => {
+            initializeUserLands(id);
+            dispatch(setCurrentUser(id));
+          })
+          .then(() => setTimeout(() => {
+            navigation.navigate("FieldSelection")
+          }, 2000));
+      } else {
+        Alert.alert('Hesap mevcut', 'Email zaten kayıtlı. Başka bir emaille tekrar dene',[{text:'Kapat'}]);
+      }
     })
-    .then(() => navigation.navigate("FieldSelection"));
+
+  
+  
 }
 
 export async function signin(email, password, dispatch, navigation) {

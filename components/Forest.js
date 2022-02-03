@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, Button, ImageBackground, Image } from "react-native";
+import { Text, TouchableOpacity, View, Button, ImageBackground, Image, Dimensions } from "react-native";
 import Land from "./Land";
 import { LogBox } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +13,13 @@ import Icon from 'react-native-vector-icons/Fontisto'
 
 export default function Forest() {
   const [lands, setLands] = useState([]);
-
-  const size=240;
+  const size=Dimensions.get('screen').width/1.7;
   const selectedLand = useSelector((state) => state.land.value);
   const user = useSelector(state=>state.user.id)
   const dispatch = useDispatch();
+  const [render, setRender] = useState(false);
+
+  
 
 
   useEffect(() => {
@@ -28,6 +30,13 @@ export default function Forest() {
     setLands([]);
     getUsersLands(user,setLands); 
   }
+
+  useEffect(() => {
+    if(lands.length===25){
+      setRender(true);
+    }
+  }, [lands]);
+
   
 
   return (
@@ -60,14 +69,14 @@ export default function Forest() {
           flexWrap: "wrap",
         }}
       >
-        {lands.map((land) => (
+        {render?lands.map((land) => (
           <TouchableOpacity
             disabled={selectedLand === land.id}
             onPress={() => dispatch(selectLand(land))}
           >
             <Land size={size} key={land.id} land={land}/>
           </TouchableOpacity>
-        ))}
+        )):<></>}
       </View>
       </ImageBackground>
     </View>

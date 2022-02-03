@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 export default function Land({ land, size }) {
   const selectedLand = useSelector((state) => state.land.value);
   const selectedSeed = useSelector((state) => state.land.seed);
+
+  
   
 
 
