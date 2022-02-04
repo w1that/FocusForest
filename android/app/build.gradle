@@ -151,9 +151,9 @@ android {
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
-            keyPassword 'android' 
+            keyPassword 'android'
         }
-         release {
+        release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file(MYAPP_UPLOAD_STORE_FILE)
                 storePassword MYAPP_UPLOAD_STORE_PASSWORD
@@ -193,6 +193,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':react-native-background-timer')
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

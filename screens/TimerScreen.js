@@ -1,13 +1,22 @@
-import React, { useEffect } from "react";
-import { View, Text, Button, Image, TouchableOpacity } from "react-native";
+import React, { useEffect} from "react";
+import { View, Text, TouchableOpacity, Image} from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { db, getUsersLands, handleLevel } from "../firebase";
+import {handleLevel } from "../firebase";
 import { LogBox } from "react-native";
-import { doc, runTransaction } from "firebase/firestore";
 import { selectLand, selectSeed } from "../slices/landSlice";
+import BackgroundTimer from 'react-native-background-timer';
 import Icon from "react-native-vector-icons/Entypo";
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]); // Ignore log notification by message
+var Sound = require('react-native-sound');
+
+export var finish = new Sound('finish.mp3', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load the sound', error);
+    return;
+  }
+  finish.setNumberOfLoops(1);
+});
 
 export default function TimerScreen({ navigation, route }) {
   const [hours, setHours] = useState(route.params.hours);
@@ -15,6 +24,9 @@ export default function TimerScreen({ navigation, route }) {
   const [milliseconds, setMilliseconds] = useState(
     route.params.minutes * 60000 + route.params.hours * 3600000
   );
+  // const milliseconds =10000;
+  // const hours =10
+  // const minutes =2
   const [width, setWidth] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [interval, setinterval] = useState(0);
@@ -26,20 +38,25 @@ export default function TimerScreen({ navigation, route }) {
 
   function fillBar() {
     setinterval(
-      setTimeout(() => {
-        setWidth((prev) => prev + 1);
-        fillBar();
+      BackgroundTimer.setInterval(() => {
+        if(width<=100){
+          setWidth((prev) => prev + 1);
+        }
       }, milliseconds / 100)
     );
   }
 
+
   useEffect(() => {
+    
     if (playing) {
-      fillBar();
+        fillBar();
     } else {
-      clearTimeout(interval);
+      BackgroundTimer.clearInterval(interval);
     }
   }, [playing]);
+
+  
 
   function play() {
     if (!playing) {
@@ -52,9 +69,10 @@ export default function TimerScreen({ navigation, route }) {
 
   useEffect(() => {
     if (width === 100) {
+      finish.play();
       handleLevel(selectedLand.id, seed);
-      clearInterval(interval);
       setPlaying(false);
+      BackgroundTimer.clearInterval(interval);
       setTimeout(() => {
         setDisabledButton(false);
       }, 1000);
@@ -96,6 +114,11 @@ export default function TimerScreen({ navigation, route }) {
           {minutes} dakika
         </Text>
       </View>
+      
+      <View style={{height:200, width:'100%', backgroundColor:'#f4e6ff', alignItems:'center', justifyContent:'center'}}>
+          <Image source={require('../assets/leaf-loading.png')} style={{width:100, height:'100%'}} />
+          <View style={{flex:1, backgroundColor:'#f4e6ff', width:'100%', height:200-width*2, position:'absolute', top:0}}></View>
+      </View>
       <View
         style={{
           backgroundColor: "#f0f0f0",
@@ -113,6 +136,7 @@ export default function TimerScreen({ navigation, route }) {
             borderRightWidth: 1,
           }}
         ></View>
+        
       </View>
       {width !== 100 ? (
         playing ? (
@@ -173,6 +197,7 @@ export default function TimerScreen({ navigation, route }) {
       ) : (
         <TouchableOpacity
           onPress={() => {
+            finish.stop();
             setTimeout(() => {
               navigation.push("FieldSelection");
             }, 1000);

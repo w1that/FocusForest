@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { nanoid } from "nanoid/non-secure";
 import { Alert } from "react-native";
+import { whoosh } from "./screens/FieldSelectionScreen";
 import { setCurrentUser } from "./slices/userSlice";
 
 // Your web app's Firebase configuration
@@ -69,6 +70,7 @@ export async function signup(
           })
           .then(() => setTimeout(() => {
             navigation.navigate("FieldSelection")
+            whoosh.play();
           }, 2000));
       } else {
         Alert.alert('Hesap mevcut', 'Email zaten kayıtlı. Başka bir emaille tekrar dene',[{text:'Kapat'}]);
@@ -92,9 +94,11 @@ export async function signin(email, password, dispatch, navigation) {
       } else {
         dispatch(setCurrentUser(res.docs[0].id));
         navigation.navigate("FieldSelection");
+        whoosh.play();
       }
     })
     .catch((err) => console.log(err));
+    
 }
 
 export async function getUsersLands(userId, setLands) {
