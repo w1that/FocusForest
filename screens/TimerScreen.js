@@ -15,7 +15,7 @@ export default function TimerScreen({ navigation, route }) {
   const [milliseconds, setMilliseconds] = useState(
     route.params.minutes * 60000 + route.params.hours * 3600000
   );
-  const [width, setWidth] = useState(97);
+  const [width, setWidth] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [interval, setinterval] = useState(0);
   const [disabledButton, setDisabledButton] = useState(true);
@@ -173,7 +173,9 @@ export default function TimerScreen({ navigation, route }) {
       ) : (
         <TouchableOpacity
           onPress={() => {
-            navigation.push("FieldSelection");
+            setTimeout(() => {
+              navigation.push("FieldSelection");
+            }, 1000);
             dispatch(selectSeed(-1))
             dispatch(selectLand({id:-1, plant:{id:-2,level:-2}}));
           }}

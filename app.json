@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "FocusForest",
-    "slug": "FocusForest",
+    "name": "FocusYard - Odaklan",
+    "slug": "FocusYard",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashh.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptivee.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.focusforest"

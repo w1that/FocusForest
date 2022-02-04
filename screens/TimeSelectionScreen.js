@@ -11,7 +11,7 @@ import {
 
 export default function TimeSelectionScreen({ navigation }) {
   const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(25);
+  const [minutes, setMinutes] = useState(30);
   const [selectedHour, setSelectedHour] = useState(hours);
   const [selectedMinute, setSelectedMinute] = useState(minutes);
   const [hoursDropDown, setHoursDropDown] = useState(false);
@@ -174,25 +174,6 @@ export default function TimeSelectionScreen({ navigation }) {
                 style={{ height: 50, width:'100%' }}
                 showsVerticalScrollIndicator={false}
               >
-                <TouchableOpacity
-                  onPress={() => {
-                    setMinutesDropDown(!minutesDropDown);
-                    setSelectedMinute(0);
-                  }}
-                  style={{backgroundColor:'#e0e0e0', width:'100%', justifyContent:'center', alignItems:'center',borderBottomWidth:1}}
-
-                >
-                  <Text style={{ fontSize: 20 }}>0</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    setMinutesDropDown(!minutesDropDown);
-                    setSelectedMinute(1);
-                  }}
-                  style={{backgroundColor:'#e0e0e0', width:'100%', justifyContent:'center', alignItems:'center',borderBottomWidth:1}}
-                >
-                  <Text style={{ fontSize: 20 }}>1</Text>
-                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
                     setMinutesDropDown(!minutesDropDown);
