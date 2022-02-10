@@ -15,7 +15,7 @@ export default function App() {
     <Provider store={store}>
       <StatusBar  hidden/>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="FieldSelection">
+        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName="Welcome">
           <Stack.Screen
             name="FieldSelection"
             component={FieldSelectionScreen}

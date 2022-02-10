@@ -172,7 +172,7 @@ export default function TimeSelectionScreen({ navigation }) {
                 style={{ height: 50, width:'100%' }}
                 showsVerticalScrollIndicator={false}
               >
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() => {
                     setMinutesDropDown(!minutesDropDown);
                     setSelectedMinute(1);
@@ -180,7 +180,7 @@ export default function TimeSelectionScreen({ navigation }) {
                   style={{backgroundColor:'#e0e0e0', width:'100%', justifyContent:'center', alignItems:'center',borderBottomWidth:1}}
                 >
                   <Text style={{ fontSize: 20 }}>1</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   onPress={() => {
                     setMinutesDropDown(!minutesDropDown);

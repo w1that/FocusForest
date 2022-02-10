@@ -99,7 +99,7 @@ export default function FieldSelectionScreen({ navigation }) {
         <TouchableOpacity onPress={()=>{
           setModalVisible(!modalVisible)
           setPoliciesVisible(false)
-        }} style={{position:'absolute', top:10, right:10, backgroundColor:'red', borderRadius:20, padding:10}}>
+        }} style={{position:'absolute', top:10, right:10, backgroundColor:'red',zIndex:2, borderRadius:20, padding:10}}>
             <Icon color={'white'} name="close-sharp" size={30} />
           </TouchableOpacity> 
           {!policiesVisible&&<TouchableOpacity onPress={()=>setPoliciesVisible(true)}>
@@ -113,7 +113,8 @@ export default function FieldSelectionScreen({ navigation }) {
           </View>
           </TouchableOpacity>}
           {policiesVisible&&(
-            <ScrollView style={{paddingHorizontal:4,}}>
+            <View>
+              <ScrollView style={{paddingHorizontal:4,}}>
               <Text style={{fontFamily:'monospace', backgroundColor:'white', borderRadius:20, padding:6, }}>Gizlilik Politikası {'\n\n'}
 
 Son güncellenme: 04/02/2022 {'\n\n'}
@@ -152,7 +153,7 @@ Yukarıda sayılan haklarınızı kullanmak üzere mithatakblt@icloud.com üzeri
 İletişim{'\n\n'}
 
 Sizlere talepleriniz doğrultusunda hizmet sunabilmek amacıyla, sadece gerekli olan kişisel verilerinizin, işbu gizlilik ve kişisel verilerin işlenmesi politikası uyarınca işlenmesini, kabul edip etmemek hususunda tamamen özgürsünüz. Uygulamayı kullanmaya devam ettiğiniz takdirde, kabul etmiş olduğunuz tarafımızca varsayılacaktır. Şayet kabul etmiyorsanız, lütfen uygulamayı tüm cihazlarınızdan kaldırınız. Ayrıntılı bilgi için bizimle mithatakblt@icloud.com e-mail adresi üzerinden iletişime geçmekten lütfen çekinmeyiniz.</Text>
-            </ScrollView>
+            </ScrollView></View>
           )}
           
         </View>
